@@ -1,5 +1,6 @@
 package org.example;
 
+//перечисления для удобства работы с json
 public enum Enum {
     ID("id"),
     TASK("task"),
