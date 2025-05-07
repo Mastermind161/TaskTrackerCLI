@@ -8,16 +8,18 @@ import java.util.HashMap;
 public class Json {
     //сюда сохраняется прочитанный json
     private ArrayList<HashMap<String,String>> outArr = new ArrayList<>();
-    private String outStr;
 
+    //создает строку под стиль json
     private String createLine(int counter, String key,ArrayList<HashMap<String,String>> data,boolean isEnd){
         return isEnd?"\t\""+key+"\":\""+data.get(counter)+"\"\n" : "\t\""+key+"\":\""+data.get(counter)+"\",\n";
     }
 
+    //создает нужный путь к файлу (тк все задачи названы по номерам)
     private String createFilePath(String id){
         return "Tasks/"+id+".json";
     }
 
+    //создает или заменяет уже существующий json
     public int createJson(String id, ArrayList<HashMap<String,String>>data) throws IOException {
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(createFilePath(id)))){
             bw.write("{");
@@ -33,7 +35,7 @@ public class Json {
             return 1;
         }
     }
-
+    //парсит в хэштаблицу json
     public int parseJson(String filePath){
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))){
             String line;
@@ -57,6 +59,7 @@ public class Json {
         }
     }
 
+    //по данному ключу заменяет его данные и обновляет время
     public int updateJson(String id, String key, String value) {
         try {
             if (parseJson(createFilePath(id)) == 0) {
@@ -80,7 +83,7 @@ public class Json {
         }
         return 1;
     }
-
+    //удаляет файл json
     public int deleteJson(String id){
         File file = new File(createFilePath(id));
         if (file.delete()){
