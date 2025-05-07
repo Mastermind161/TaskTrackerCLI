@@ -15,7 +15,7 @@ public class Json {
     }
 
     //создает нужный путь к файлу (тк все задачи названы по номерам)
-    private String createFilePath(String id){
+    public String createFilePath(String id){
         return "Tasks/"+id+".json";
     }
 
@@ -37,6 +37,7 @@ public class Json {
     }
     //парсит в хэштаблицу json
     public int parseJson(String filePath){
+        outArr.clear();
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))){
             String line;
             while((line=br.readLine())!=null){
@@ -61,6 +62,7 @@ public class Json {
 
     //по данному ключу заменяет его данные и обновляет время
     public int updateJson(String id, String key, String value) {
+        parseJson(createFilePath(id));
         try {
             if (parseJson(createFilePath(id)) == 0) {
                 for (HashMap<String, String> map : outArr) {
