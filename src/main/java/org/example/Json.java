@@ -7,11 +7,11 @@ import java.util.HashMap;
 
 public class Json {
     //сюда сохраняется прочитанный json
-    private ArrayList<HashMap<String,String>> outArr = new ArrayList<>();
+    private final ArrayList<HashMap<String,String>> outArr = new ArrayList<>();
 
     //создает строку под стиль json
     private String createLine(int counter, String key,ArrayList<HashMap<String,String>> data,boolean isEnd){
-        return isEnd?"\t\""+key+"\":\""+data.get(counter)+"\"\n" : "\t\""+key+"\":\""+data.get(counter)+"\",\n";
+        return isEnd?"\t\""+key+"\":\""+data.get(counter).get(key)+"\"\n" : "\t\""+key+"\":\""+data.get(counter).get(key)+"\",\n";
     }
 
     //создает нужный путь к файлу (тк все задачи названы по номерам)
@@ -22,12 +22,12 @@ public class Json {
     //создает или заменяет уже существующий json
     public int createJson(String id, ArrayList<HashMap<String,String>>data) throws IOException {
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(createFilePath(id)))){
-            bw.write("{");
+            bw.write("{\n");
             bw.write(createLine(0,Enum.ID.getName(),data,false));
             bw.write(createLine(1,Enum.TASK.getName(),data,false));
             bw.write(createLine(2,Enum.STATUS.getName(),data,false));
             bw.write(createLine(3,Enum.CREATEDAT.getName(),data,false));
-            bw.write(createLine(4,Enum.UPDATEAT.getName(),data,false));
+            bw.write(createLine(4,Enum.UPDATEAT.getName(),data,true));
             bw.write("}");
             return 0;
         }catch (Exception e){
@@ -62,19 +62,18 @@ public class Json {
 
     //по данному ключу заменяет его данные и обновляет время
     public int updateJson(String id, String key, String value) {
-        parseJson(createFilePath(id));
         try {
             if (parseJson(createFilePath(id)) == 0) {
                 for (HashMap<String, String> map : outArr) {
                     if (map.containsKey(key)) {
                         map.remove(key);
                         map.put(key, value);
-                        break;
+                        outArr.get(4).remove(Enum.UPDATEAT.getName());
+                        outArr.get(4).put(Enum.UPDATEAT.getName(),new Date().toString());
+                        createJson(id,outArr);
+                        return 0;
                     }
-                    outArr.get(4).remove(Enum.UPDATEAT.getName());
-                    outArr.get(4).put(Enum.UPDATEAT.getName(),new Date().toString());
-                    createJson(id,outArr);
-                    return 0;
+
                 }
             }else {
                 return 1;

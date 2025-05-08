@@ -6,9 +6,10 @@ import java.util.*;
 public class Main {
     static Scanner scanner = new Scanner(System.in);
     final static String name = "***task-cli*** --- ";
-    private static Json json = new Json();
+
 
     public static int commCreateTask(String task) throws IOException {
+        Json json = new Json();
         int counter = 0;
         while (json.parseJson(json.createFilePath(String.valueOf(counter)))!=1){
             counter++;
@@ -33,6 +34,7 @@ public class Main {
     }
 
     public static int commUpdate(String id, String value){
+        Json json = new Json();
         if (json.updateJson(id,Enum.TASK.getName(), value)==0){
             System.out.println(name+"Задача (id "+id+") обновлена.");
             return 0;
@@ -43,6 +45,7 @@ public class Main {
     }
 
     public static int commMark(String id,String value){
+        Json json = new Json();
         if (Objects.equals(value,"to do")||Objects.equals(value,"in-process")||Objects.equals(value,"done")){
             if (json.updateJson(id,Enum.STATUS.getName(), value)==0){
                 System.out.println(name+"Задача (id "+id+") обновлена.");

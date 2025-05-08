@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6a0d76bd-cac7-4e0c-a2b7-d33c6527e698" name="Changes" comment="Json парсер дописал(с комментами)">
+    <list default="true" id="6a0d76bd-cac7-4e0c-a2b7-d33c6527e698" name="Changes" comment="main - попроавить глюки с json экземпляром">
       <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Json.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Json.java" afterDir="false" />
@@ -100,7 +100,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746645371959</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="main - попроавить глюки с json экземпляром">
+      <option name="closed" value="true" />
+      <created>1746658033269</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1746658033269</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -118,6 +126,31 @@
     <MESSAGE value="добавил перечисление, начал писать парсер Json" />
     <MESSAGE value="Json парсер дописал" />
     <MESSAGE value="Json парсер дописал(с комментами)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Json парсер дописал(с комментами)" />
+    <MESSAGE value="main - попроавить глюки с json экземпляром" />
+    <option name="LAST_COMMIT_MESSAGE" value="main - попроавить глюки с json экземпляром" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/Json.java</url>
+          <line>38</line>
+          <properties class="org.example.Json" method="parseJson">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/Json.java</url>
+          <line>63</line>
+          <properties class="org.example.Json" method="updateJson">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
