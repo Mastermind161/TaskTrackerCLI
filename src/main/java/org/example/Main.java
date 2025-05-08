@@ -1,11 +1,12 @@
 package org.example;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
 public class Main {
     static Scanner scanner = new Scanner(System.in);
-    final static String name = "***task-cli*** --- ";
+    final static String name = "***task-cli*** ";
 
 
     public static int commCreateTask(String task) throws IOException {
@@ -60,6 +61,47 @@ public class Main {
         }
     }
 
+    public static int commViewList(){
+        ArrayList<Json> data = parseAllTasks();
+        if (!data.isEmpty()){
+            for (Json json : data){
+                System.out.println(name+"\n\tЗадача: "+json.getOutArr().get(1).get(Enum.TASK.getName())+
+                        ", \n\tId задачи: "+json.getOutArr().get(0).get(Enum.ID.getName())+
+                        ", \n\tСтатус задачи: "+json.getOutArr().get(2).get(Enum.STATUS.getName())+
+                        ", \n\tСоздана "+json.getOutArr().get(3).get(Enum.CREATEDAT.getName())+
+                        ", \n\tПоследнее обновление информации: "+json.getOutArr().get(4).get(Enum.UPDATEAT.getName())+".\n");
+            }
+            return 0;
+        }else{
+            return 1;
+        }
+    }
+
+    //возвращает массив jsonов всех файлов в папке Tasks, распаршенных в хэшмап
+    private static ArrayList<Json> parseAllTasks(){
+        ArrayList<Json> data = new ArrayList<>();
+        File folder = new File("Tasks");
+        File[] files = folder.listFiles();
+        try{
+            for (File file : files) {
+                if (file.getName().endsWith(".json")) {
+                    Json json = new Json();
+                    if (json.parseJson(file.getPath())==0){
+                        data.add(json);
+                    }
+                }
+            }
+            if (data.isEmpty()){
+                System.out.println("Лист задач пуст.");
+            }
+
+        }catch (Exception e){
+            System.out.println("Лист задач пуст.");
+
+        }
+
+        return data;
+    }
 
 
     public static void main(String[] args) throws IOException {
@@ -77,6 +119,8 @@ public class Main {
             }else if(command.startsWith("mark")) {
                 String[] str = command.split(" ", 3);
                 commMark(str[1], str[2]);
+            }else if(command.startsWith("list")){
+                commViewList();
             }
         }
     }

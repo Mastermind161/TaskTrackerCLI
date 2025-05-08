@@ -6,8 +6,14 @@ import java.util.Date;
 import java.util.HashMap;
 
 public class Json {
+
+
     //сюда сохраняется прочитанный json
     private final ArrayList<HashMap<String,String>> outArr = new ArrayList<>();
+
+    public ArrayList<HashMap<String, String>> getOutArr() {
+        return outArr;
+    }
 
     //создает строку под стиль json
     private String createLine(int counter, String key,ArrayList<HashMap<String,String>> data,boolean isEnd){
